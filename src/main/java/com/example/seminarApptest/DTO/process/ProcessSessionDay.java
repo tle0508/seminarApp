@@ -12,8 +12,8 @@ public class ProcessSessionDay {
         this.date = date;
         this.processSchedule = processSchedule;
     }
-
-    public ProcessSessionDay() {
+    public ProcessSessionDay(LocalDate currentDate) {
+        this.date = currentDate;
     }
 
 

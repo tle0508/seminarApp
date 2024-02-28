@@ -10,9 +10,8 @@ import java.io.InputStreamReader;
 import java.time.LocalDate;
 
 public class ReadInput {
-    public SessionDay sessionDay = new SessionDay();
-    public void read(InputStream inputStream){
-
+    public SessionDay read(InputStream inputStream){
+        SessionDay sessionDay = new SessionDay();
         try (
                 InputStreamReader in = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(in);
@@ -28,12 +27,12 @@ public class ReadInput {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }  public Schedule parseSchedule(String line) {
+        return sessionDay;
+    }
+    public Schedule parseSchedule(String line) {
         int duration = Integer.parseInt(line.replaceAll("\\D", ""));
         String sessionDescription = line.replaceAll("\\d+min", "");
         return new Schedule(sessionDescription, duration);
     }
-    public SessionDay getSessionDay() {
-        return sessionDay;
-    }
+
 }
