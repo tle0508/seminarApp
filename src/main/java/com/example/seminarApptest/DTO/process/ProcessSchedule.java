@@ -7,19 +7,11 @@ public class ProcessSchedule {
     private String sessionDescription;
     private Integer duration;
 
-    public ProcessSchedule() {
-    }
-
     public ProcessSchedule(LocalTime time, String sessionDescription, Integer duration) {
         this.time = time;
         this.sessionDescription = sessionDescription;
         this.duration = duration;
     }
-
-    public ProcessSchedule(LocalTime scheduleTime, String networkingTime) {
-
-    }
-
     public LocalTime getTime() {
         return time;
     }

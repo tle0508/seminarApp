@@ -1,0 +1,17 @@
+@Autowired เป็น annotation ใน Spring Framework ที่ใช้สำหรับทำการ Dependency Injection (DI)
+หรือการสร้างการเชื่อมต่อระหว่างอ็อบเจ็กต์ที่ต้องการใช้งานกับอ็อบเจ็กต์อื่น ๆ ที่เกี่ยวข้อง
+ซึ่งเป็นหนึ่งในหลายวิธีที่ Spring ใช้เพื่อจัดการ Dependency Injection.
+การใช้ @Autowired บ่งบอกให้ Spring Framework ทราบว่าต้องมีการสร้าง instance ของคลาสนี้และเข้าถึง dependency
+ที่ได้รับ Annotation นี้. นอกจากนี้ @Autowired ยังสามารถใช้กับตัวแปร, เมทอด, หรือคอนสตรักเตอร์ของคลาสได้ตามที่เราต้องการ.
+
+
+@RestController เป็น annotation ที่ใช้กับคลาสใน Spring Framework ที่มีหน้าที่ระบุว่าคลาสนั้นจะให้บริการ RESTful API
+และจะให้ Spring MVC รู้ว่าจะเป็น Controller ที่ต้องการส่งค่ากลับในรูปแบบของ JSON หรือ XML ไปยัง client โดยอัตโนมัติตาม Content Negotiation.
+ในทางปฏิบัติ, @RestController เป็นการรวม @Controller และ @ResponseBody ไว้ด้วยกัน.
+
+@Controller บ่งบอกว่าเป็นคลาสที่จะเป็น Controller ของ Spring MVC, และ @ResponseBody
+บ่งบอกว่าเมทอดภายในคลาสนี้จะ return ผลลัพธ์ในรูปแบบของข้อมูล (เช่น JSON, XML) ทันที แทนที่จะคืนค่าไปยังหน้าจอ (หน้าเว็บ)
+ดังนั้น, การใช้ @RestController มักจะทำให้ไม่ต้องใช้ @ResponseBody แต่อย่างใด.
+เราสามารถให้เมทอดในคลาส @RestController คืนค่าข้อมูลโดยตรง โดย Spring MVC
+จะทำการแปลงข้อมูลเหล่านั้นเป็นรูปแบบที่ client ร้องขอ (Content Negotiation) ซ
+ึ่งสามารถเป็น JSON, XML, หรือรูปแบบอื่น ๆ ได้ตามความต้องการของ client ครับ.

@@ -16,9 +16,13 @@ import java.util.List;
 
 @RestController
 public class SeminarController {
-	//
+
+	private final SeminarService seminarService;
+
 	@Autowired
-	private SeminarService seminarService;
+	public SeminarController(SeminarService seminarService) {
+		this.seminarService = seminarService;
+	}
 
 	@PostMapping(value="/uploadFile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<ProcessSessionDay> uploadFile(@RequestParam("file") MultipartFile userFile) throws IOException {

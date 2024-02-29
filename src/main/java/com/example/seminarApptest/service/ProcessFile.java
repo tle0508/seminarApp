@@ -24,21 +24,19 @@ public class ProcessFile {
     public List<ProcessSessionDay> process(SessionDay sessionDay) {
         currentDate = sessionDay.getDay();
         List<ProcessSessionDay> processedDataList = new ArrayList<>();
-        ProcessSessionDay processSessionDay = new ProcessSessionDay(currentDate, new ArrayList<>());
+        ProcessSessionDay processSessionDay = new ProcessSessionDay(currentDate);
         for (Schedule schedule : sessionDay.getScheduleList()) {
             int duration = schedule.getDuration();
             // Check if lunchtime
             if (scheduleTime.equals(LUNCH_TIME)) {
-                ProcessSchedule lunchSchedule = new ProcessSchedule(scheduleTime, "Lunch", null);
-                processSessionDay.getProcessSchedule().add(lunchSchedule);
+                addEvent(processSessionDay, "Lunch");
                 scheduleTime = AFTERNOON_SESSION;
             }
             // Check if networking
-            if (!scheduleTime.isBefore(NETWORKING_START_TIME) && scheduleTime.isBefore(NETWORKING_END_TIME)) {
-                ProcessSchedule networkSchedule = new ProcessSchedule(scheduleTime, "Networking Event", null);
-                startNewDay();
-                processSessionDay.getProcessSchedule().add(networkSchedule);
+            else if (!scheduleTime.isBefore(NETWORKING_START_TIME) && scheduleTime.isBefore(NETWORKING_END_TIME)) {
+                addEvent(processSessionDay, "Networking Event");
                 processedDataList.add(processSessionDay);
+                startNewDay();
                 processSessionDay = new ProcessSessionDay(currentDate);
             }
             ProcessSchedule processSchedule = new ProcessSchedule(scheduleTime, schedule.getSessionDescription(), schedule.getDuration());
@@ -48,7 +46,10 @@ public class ProcessFile {
         processedDataList.add(processSessionDay);
         return processedDataList;
     }
-
+    private void addEvent(ProcessSessionDay processSessionDay,String event){
+        ProcessSchedule eventSchedule = new ProcessSchedule(scheduleTime, event,null);
+        processSessionDay.getProcessSchedule().add(eventSchedule);
+    }
     private void startNewDay() {
         currentDate = currentDate.plusDays(1);
         if (isWeekend(currentDate)) {
@@ -57,7 +58,7 @@ public class ProcessFile {
         scheduleTime = MORNING_SESSION;
     }
 
-    private boolean isWeekend(LocalDate date) {
+    private static boolean isWeekend(LocalDate date) {
         DayOfWeek dayOfWeek = date.getDayOfWeek();
         return dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY;
     }
